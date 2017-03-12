@@ -1,0 +1,3 @@
+[submodule "apps/rallex"]
+	path = apps/rallex
+	url = git@github.com:silbermm/rallex.git
