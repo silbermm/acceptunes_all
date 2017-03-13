@@ -23,7 +23,11 @@ defmodule AcceptunesWeb.Router do
 
     resources "/registration", RegistrationController, only: [:new, :create]
     get "/login", SessionController, :index
+    post "/login", SessionController, :login
     get "/logout", SessionController, :logout
+
+    get "/profile", ProfileController, :index
+    put "/profile", ProfileController, :update
 
     get "/", PageController, :index
   end

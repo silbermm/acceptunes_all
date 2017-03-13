@@ -2,7 +2,9 @@
 
 <%= form_for @changeset, session_path(@conn, :login), fn f -> %>
   <div class="form-group">
-
+    <label> Email </label>
+    <%= email_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
   </div>
 
   <div class="form-group">

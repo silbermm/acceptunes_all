@@ -7,6 +7,7 @@ defmodule AcceptunesWeb.Schema.User do
     field :email, :string
     field :crypted_password, :string
     field :password, :string, virtual: true
+    field :rally_token, :string
     timestamps()
   end
 
@@ -16,10 +17,17 @@ defmodule AcceptunesWeb.Schema.User do
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, ~w(email password first_name last_name))
-    |> validate_required(~w(email password)a)
+    |> validate_required(~w(email password))
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 5)
+  end
+
+  def profile_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, ~w(email first_name last_name rally_token))
+    |> unique_constraint(:email)
+    |> validate_format(:email, ~r/@/)
   end
 
 end
