@@ -5,12 +5,12 @@ defmodule AcceptunesWeb.SessionController do
   alias AcceptunesWeb.Repositories.UserRepo
 
   def index(conn, _params) do
-    changeset = User.changeset(%User{})
+    changeset = UserRepo.changeset(%User{})
     conn |> render "index.html", changeset: changeset
   end
 
   def login(conn, %{"user" => user_params}) do
-    changeset = User.changeset(%User{}, user_params)
+    changeset = UserRepo.changeset(%User{}, user_params)
     {authenticated?, user} = UserRepo.login(changeset)
     handle_login(conn, authenticated?, user, changeset)
   end

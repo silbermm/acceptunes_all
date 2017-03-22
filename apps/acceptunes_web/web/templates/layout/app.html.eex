@@ -13,14 +13,24 @@
 
   <body>
     <div class="container">
-      <header class="header">
+      <div class="header clearfix">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
             <li>
             <%= if user_info @conn do %>
-              <a href=""> 
-                <%= link user_info(@conn).email, to: profile_path(@conn, :index) %>
-              </a>
+              <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= user_info(@conn).email %> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li> <%= link("Profile", to: profile_path(@conn, :index), class: "dropdown-item") %> </li>
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li> <%= link("Logout", to: session_path(@conn, :logout), class: "dropdown-item") %></li>
+                </ul>
+              </div>
             <% else %>
               <a href="/login"> 
                 Login 
@@ -29,17 +39,26 @@
             </li>
           </ul>
         </nav>
-        <span class="logo"></span>
-      </header>
+       <h3 class="text-muted"> Acceptunes </h3>
+      </div>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= if get_flash(@conn, :info) do %>
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <% end %>
+
+      <%= if get_flash(@conn, :error) do %>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <% end %>
 
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
-
+			<footer class="footer">
+        <p>© 2017 Matt Silbernagel </p>
+      </footer>
     </div> <!-- /container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

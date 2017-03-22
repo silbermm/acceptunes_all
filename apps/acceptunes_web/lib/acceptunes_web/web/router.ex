@@ -29,7 +29,8 @@ defmodule AcceptunesWeb.Router do
     get "/profile", ProfileController, :index
     put "/profile", ProfileController, :update
 
-    get "/", PageController, :index
+    get "/", DashboardController, :index
+
   end
 
   # Other scopes may use custom stacks.

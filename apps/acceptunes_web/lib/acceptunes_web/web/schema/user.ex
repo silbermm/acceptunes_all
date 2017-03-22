@@ -16,8 +16,8 @@ defmodule AcceptunesWeb.Schema.User do
 
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, ~w(email password first_name last_name))
-    |> validate_required(~w(email password))
+    |> cast(params, [:email, :password, :first_name, :last_name])
+    |> validate_required([:email, :password])
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 5)

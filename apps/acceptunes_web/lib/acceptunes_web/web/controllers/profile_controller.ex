@@ -2,8 +2,9 @@ defmodule AcceptunesWeb.ProfileController do
   use AcceptunesWeb.Web, :controller
   alias AcceptunesWeb.Schema.User
   alias AcceptunesWeb.Repositories.UserRepo
-  
-  require IEx
+  alias AcceptunesWeb.UnauthenticatedController
+
+  plug Guardian.Plug.EnsureAuthenticated, handler: UnauthenticatedController
 
   def index(conn, _params) do
     user = Guardian.Plug.current_resource(conn)
